@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>test nomnoml</title>
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <style>
+    body { background-color: #fdf6e3; padding: 0; margin: 10px; overflow-y: scroll }
+    .success, .failure, .ignored { margin: 0px; padding: 1px 5px; color: #eee; cursor: pointer; }
+    .success:hover, .failure:hover { background: rgba(0,0,0,0.1) }
+    #testreport { font-size: 13px; font-family: Monaco, "Lucida Console", monospace }
+    h1 { color: #657b83; font-size: 20px; font-family: Monaco, "Lucida Console", monospace }
+    .success { color: #5e7d00 }
+    .failure { color: #b03911 }
+    .ignored { color: #bababa }
+    .success::before { content: '✓ ' }
+    .failure::before { content: '✗ ' }
+    .ignored::before { content: '- ' }
+    .details { margin: 1px 5px 5px 35px; color: #b03911 }
+
+    svg, img { height: 280px; max-width: 400px; }
+    canvas { max-height: 280px; }
+    iframe { border: 1px solid #cacaca }
+    .testcase {
+      display: inline-block;
+      margin: 5px;
+      vertical-align: top;
+      background: #eee8d5;
+      border-radius: 5px;
+      height: 320px;
+    }
+    .testcase h1 {
+      font-size: 12px;
+      margin: 10px 10px 5px 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class=testcase>
+    <h1>Canvas</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+#font: Arial
+#.hello: underline
+[Pirate|
+  eyeCount: Int|
+  [a]--[b]
+  [a]-:>[c]
+]
+[<abstract>Marauder]<:--[Pirate]
+[Pirate] - 0..7[<hello>Arrrrrr]
+[<database>db]->[Pirate]
+[db]->[rum]
+[Pirate]-> *[rum]
+[<start>st]->[<state>plunder]
+[plunder]->[<choice>loot]
+[loot]->[st]
+[loot] no ->[<end>e]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Svg</h1>
+    <div nomnoml=svg>
+      <script type="text/vnd.nomnoml">
+#font: Arial
+#.hello: underline
+[Pirate|
+  eyeCount: Int|
+  [a]--[b]
+  [a]-:>[c]
+]
+[<abstract>Marauder]<:--[Pirate]
+[Pirate] - 0..7[<hello>Arrrrrr]
+[<database>db]->[Pirate]
+[db]->[rum]
+[Pirate]-> *[rum]
+[<start>st]->[<state>plunder]
+[plunder]->[<choice>loot]
+[loot]->[st]
+[loot] no ->[<end>e]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Built in styles</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+#direction: right
+[<frame>frame|[<note> note]]
+[<package>package|[<reference> reference]]
+[class|items: Object\[\]] - [<hidden> hidden]
+[hidden] -- [<label> label]
+[hidden] - [<instance> instance]
+[<abstract> abstract] <:-- [<instance> instance]
+[<package> package] <- [<frame> frame]
+[<database> database] <:- [<start> start]
+[<end> end] -/- [<state> state]
+[<choice> choice] <-o [<input> input]
+[<sender> sender] <-+ [<receiver> receiver]
+[<actor> actor] <-> [<usecase> usecase]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Custom styles</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+#direction: right
+#.box: fill=pink italic bold visual=rhomb
+[<box>box]
+#.blob: fill=limegreen dashed underline visual=ellipse
+[<blob>blob]
+#.quux: fill=pink italic bold visual=rhomb
+[<quux>quux]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Ranker config</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+#ranker: longest-path
+[a] -> [b]
+[a] -> [c]
+[c] -> [d]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Text heuristic</h1>
+    <div nomnoml=svg>
+      <script type="text/vnd.nomnoml">
+#zoom: 0.5
+#font: Arial
+#direction: right
+[iii]
+[mmm]
+[MMM]
+[ABC<T>]
+[漢字漢字]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Text measure</h1>
+    <div nomnoml=svg text-measure-canvas>
+      <script type="text/vnd.nomnoml">
+#zoom: 0.5
+#font: Arial
+#direction: right
+[iii]
+[mmm]
+[MMM]
+[ABC<T>]
+[漢字漢字]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Edge label linebreak</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+[Left] left`association <-> right`association [Right]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Self referential</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+[Banana] <-> self [Banana]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>Label placement</h1>
+    <div nomnoml=canvas>
+      <script type="text/vnd.nomnoml">
+#direction: right
+#spacing: 60
+#edgeMargin: -5
+[Left] left - right [C1]
+[Left] left - right [C2]
+[Left] left - right [C3]
+[C1] left - right [Right]
+[C2] left - right [Right]
+[C3] left - right [Right]
+      </script>
+    </div>
+  </div>
+
+  <div class=testcase>
+    <h1>NodeJS render</h1>
+    <img src="output.node-test.svg">
+  </div>
+
+  <div class=testcase>
+    <h1>Distribution bundle</h1>
+    <iframe src="standalone.usecase.html" height=270></iframe>
+  </div>
+
+
+  <div id=testreport></div>
+
+
+  <script src="../dist/nomnoml.web.js"></script>
+  <script>
+    function require(id) {
+      return {
+        './skanaar.testsuite.js': TestSuite,
+        '../dist/nomnoml.js': nomnoml
+      }[id]
+    }
+    var module = {}
+  </script>
+  <script src="skanaar.testsuite.js"></script>
+  <script src="nomnoml.spec.js"></script>
+
+  <script>
+    function mountNomnoml() {
+      for (var el of document.querySelectorAll('[nomnoml=canvas]>script[type="text/vnd.nomnoml"]'))
+        mountCanvas(el.parentElement, el.innerText)
+
+      for (var el of document.querySelectorAll('[nomnoml=svg]>script[type="text/vnd.nomnoml"]'))
+        mountSvg(el.parentElement, el.innerText)
+
+      function mountCanvas(host, source){
+        nomnoml.draw(host.appendChild(document.createElement('canvas')), source)
+      }
+
+      function mountSvg(host, source){
+        var canvas = host.attributes['text-measure-canvas']
+        host.innerHTML = nomnoml.renderSvg(source, canvas ? document.createElement('canvas') : null)
+      }
+    }
+
+    mountNomnoml()
+  </script>
+
+</body>
+</html>
