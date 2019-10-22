@@ -118,7 +118,7 @@
 				visual=sender<br>
 				visual=start<br>
 				visual=transceiver
-				
+
 				<h3>Available modifiers are</h3>
 
 				bold<br>
@@ -256,6 +256,9 @@
 					<a class="btn" href="/" v-on:click.prevent="downloadSrc">
 						<icon id=download-outline></icon> Download source
 					</a>
+					<a class="btn" href="/" v-on:click.prevent="downloadPython">
+						<icon id=download-py></icon> Download Python
+					</a>
 				</div>
 			</div>
 		</div>
@@ -334,7 +337,7 @@
 			</a>
 
 			<div id="tooltip"></div>
-			
+
 			<div class="storage-tools">
 				<span class="storage-status" v-bind:class="{ visible: isUrlStorage() }">
 					View mode, changes are not saved.
@@ -342,7 +345,7 @@
 					   title="Save this diagram to localStorage">save</a>
 					<a href="#" title="Discard this diagram">close</a>
 				</span>
-				
+
 				<span class="storage-status" v-bind:class="{ visible: isLocalFileStorage() }">
 					Editing local file
 					<a href="#" title="Exit from this file">close</a>
@@ -403,17 +406,17 @@
 	<script src="codemirror/codemirror-compressed.js"></script>
 	<script src="codemirror/nomnoml.codemirror-mode.js"></script>
 	<script src="dist/nomnoml.web.js"></script>
-	<script src="dist/webapp.js"></script>	
+	<script src="dist/webapp.js"></script>
 	<script src="lib/vue.min.js"></script>
-	
-	
+
+
 	<script>
 		var app = new App(nomnoml, CodeMirror, saveAs, _)
 		ExportMenu('[export-menu]', app)
 		FileMenu('[file-menu]', app)
 		StorageTools('.storage-tools', app)
 	</script>
-	
-	
+
+
 </body>
 </html>

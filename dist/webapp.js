@@ -286,6 +286,17 @@ var DownloadLinks = function() {
         }), this.filename + ".nomnoml")
     }
     ;
+    //Funcion para traducir a python
+    DownloadLinks.prototype.pythonDownload = function() {
+        var src = this.source;
+        var transl = String(src);
+        var classes = transl.split(' ');
+        src = transl;
+        this.saveAs(new Blob([src],{
+            type: "text/txt"
+        }), this.filename + ".py")
+    }
+    ;
     DownloadLinks.prototype.setFilename = function(filename) {
         filename = filename || "graph";
         this.filename = filename
@@ -638,6 +649,9 @@ function ExportMenu(selector, app) {
             },
             downloadSrc: function() {
                 app.downloader.srcDownload()
+            },
+            downloadPython: function() {
+                app.downloader.pythonDownload()
             },
             onSourceChange: function(src) {
                 this.shareLink = "#view/" + Route.urlEncode(src)
