@@ -289,12 +289,17 @@ var DownloadLinks = function() {
     //Funcion para traducir a python
     DownloadLinks.prototype.pythonDownload = function() {
         var src = this.source;
-        var transl = String(src);
-        var classes = transl.split(' ');
-        src = transl;
-        this.saveAs(new Blob([src],{
+        src = String(src);
+        var transl = src.split(/\[(.*?)\]/);
+        var clases = "";
+        for (x=0;x<transl.length;x++){
+          if(transl[x]!== (""||null||""||"->") && /\S/.test(transl[x])){
+            clases += " clase: " +transl[x];
+          }
+        }
+        this.saveAs(new Blob([clases],{
             type: "text/txt"
-        }), this.filename + ".py")
+        }), this.filename + ".txt")
     }
     ;
     DownloadLinks.prototype.setFilename = function(filename) {
