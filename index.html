@@ -259,7 +259,7 @@
 						<icon id=download-outline></icon> Download source
 					</a>
 					<a class="btn" href="/" v-on:click.prevent="downloadPython">
-						<icon id=download-py></icon> Download C#	
+						<icon id=download-py></icon> Download C#
 					</a>
 				</div>
 			</div>
@@ -382,26 +382,22 @@
 
 
 
-	<script type="text/vnd.nomnoml.class" id="defaultGraph">[Pirate|eyeCount: Int|raid();pillage()|
-  [beard]--[parrot]
-  [beard]-:>[foul mouth]
-]
-
-[<abstract>Marauder]<:--[Pirate]
-[Pirate]- 0..7[mischief]
-[jollyness]->[Pirate]
-[jollyness]->[rum]
-[jollyness]->[singing]
-[Pirate]-> *[rum|tastiness: Int|swig()]
-[Pirate]->[singing]
-[singing]<->[rum]
-
-[<start>st]->[<state>plunder]
-[plunder]->[<choice>more loot]
-[more loot]->[st]
-[more loot] no ->[<end>e]
-
-[<actor>Sailor] - [<usecase>shiver me;timbers]</script>
+	<script type="text/vnd.nomnoml.class" id="defaultGraph">[Compartment|string lines;nodes Classifier;relations Relations]
+[Classifier|string type;string name;Compartment compartments;int width;int height;int x;int y]
+[Relation|string startLabel;string endLabel;string type;string startShape;string endShape;Point path]
+[Compartment] ->[Classifier]
+[Classifier] ->[Compartment]
+[Compartment] ->[Relation]
+[parser]-->[UML Representation]
+[layouter||layout(ast: Compartment)]
+[renderer||render(d: Compartment)]
+[parser||String source] ->[Jison]
+[layouter]-->[UML Representation]
+[layouter] ->[dagre]
+[renderer]-->[UML Representation]
+[renderer]->[Canvas]
+[measurer]<:--[renderer]
+[layouter]->[measurer]</script>
 
 	<script src="lib/underscore.min.js"></script>
 	<script src="lib/filesaver.min.js"></script>
