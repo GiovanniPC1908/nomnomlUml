@@ -1,7 +1,5 @@
 [<frame>Patron plantilla|
-  [<abstract>Automovil||  desplazar()
-  acelecar()
-  frenar()]
+  [<abstract>Automovil||  desplazar(); acelecar(); frenar()]
   [Automovil] depends -> [AutomovilManual|| cambiarMarcha()]
   [Automovil] depends -> [AutomovilAutomatico|| CambiarMarcha()]
 ]
