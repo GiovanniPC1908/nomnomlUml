@@ -339,6 +339,37 @@ var DownloadLinks = function() {
             var position = csharp.indexOf(searchTerm) + claseRelacion[x-1].length;
             csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
           }
+          else if(claseRelacion[x] == "-"){
+            var b = "//Asociacion entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          else if(claseRelacion[x] == "-->"){
+            var b = "//Dependencia entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          else if(claseRelacion[x] == "-:>"){
+            var b = "//Generalizacion entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          else if(claseRelacion[x] == "o->"){
+            var b = "//Agregacion entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          else if(claseRelacion[x] == "--:>"){
+            var b = "//Implementacion entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          else if(claseRelacion[x] == "+->"){
+            var b = "//Composición entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          //--:>
         }
         console.log(claseRelacion);
         this.saveAs(new Blob([csharp],{
