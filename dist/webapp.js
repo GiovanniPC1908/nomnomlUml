@@ -326,6 +326,20 @@ var DownloadLinks = function() {
           csharp += "}\n";
         }
         csharp += "}\n";
+        for(x=0;x<claseRelacion.length;x++){
+          if(claseRelacion[x] == "->"){
+            var b = " : " + claseRelacion[x-1];
+            var searchTerm = claseRelacion[x+1];
+            var position = csharp.indexOf(searchTerm) + claseRelacion[x+1].length;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+          else if(claseRelacion[x] == "<-"){
+            var b = " : " + claseRelacion[x+1];
+            var searchTerm = claseRelacion[x-1];
+            var position = csharp.indexOf(searchTerm) + claseRelacion[x-1].length;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
+        }
         console.log(claseRelacion);
         this.saveAs(new Blob([csharp],{
             type: "text/txt"
