@@ -301,7 +301,13 @@ var DownloadLinks = function() {
             relaciones.push(transl[x]);
           }
         }
-        console.log(relaciones);
+        const uniqueSet= new Set(clases);
+        clases = [...uniqueSet];
+        csharp = "";
+        for (x=0;x<clases.length;x++){
+          csharp += "class " + clases[x].split('|')[0] + "{...}\n";
+        }
+        console.log(csharp);
         this.saveAs(new Blob([clases],{
             type: "text/txt"
         }), this.filename + ".txt")
