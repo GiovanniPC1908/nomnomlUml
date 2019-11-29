@@ -305,10 +305,19 @@ var DownloadLinks = function() {
         clases = [...uniqueSet];
         csharp = "";
         for (x=0;x<clases.length;x++){
-          csharp += "class " + clases[x].split('|')[0] + "{...}\n";
+          csharp += "class " + clases[x].split('|')[0] + "{\n";
+          if(clases[x].split('|')[1]){
+            for(i = 0; i<clases[x].split('|')[1].split(';').length; i++)
+              csharp += "\t" + clases[x].split('|')[1].split(';')[i] +"{ get; set; }\n";
+          }
+          if(clases[x].split('|')[2]){
+            for(i = 0; i<clases[x].split('|')[2].split(';').length; i++)
+              csharp += "\tpublic void " + clases[x].split('|')[2].split(';')[i] + "{}\n"
+          }
+          csharp += "}\n";
         }
         console.log(csharp);
-        this.saveAs(new Blob([clases],{
+        this.saveAs(new Blob([csharp],{
             type: "text/txt"
         }), this.filename + ".txt")
     }
