@@ -1,0 +1,5 @@
+[<frame>Strategy pattern|
+  [client] o- [<abstract>Strategy|  operation()]
+  [Strategy] <:-- [StrategyA]
+  [Strategy] <:-- [StrategyB]
+]

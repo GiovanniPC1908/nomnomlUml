@@ -1,0 +1,8 @@
+[<frame>Patron Factory|
+  [<abstract>Creador||  metodoFactoria()
+  unaOperacion()]
+  [Creador|| ] <:- [CreadorConcreto|| metodoFactoria()]
+  [ProductoConcreto||] <-- [CreadorConcreto]
+  [<interface>Producto] <:-- [ProductoConcreto]
+  ]
+
