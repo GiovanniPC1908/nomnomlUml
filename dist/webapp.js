@@ -293,6 +293,7 @@ var DownloadLinks = function() {
         var transl = src.split(/\[(.*?)\]/);
         var clases = [];
         var relaciones = [];
+        var claseRelacion = [];
         for (x=0;x<transl.length;x++){
           if(transl[x].match(/^[A-Z0-9]/i)){
             clases.push(transl[x]);
@@ -300,10 +301,18 @@ var DownloadLinks = function() {
           else if(/\S/.test(transl[x])){
             relaciones.push(transl[x]);
           }
+          if(/\S/.test(transl[x])){
+            claseRelacion.push(transl[x]);
+          }
+        }
+        for (x=0;x<claseRelacion.length;x++){
+          if(claseRelacion[x].split('|')[1]){
+            claseRelacion[x] = claseRelacion[x].split('|')[0];
+          }
         }
         const uniqueSet= new Set(clases);
         clases = [...uniqueSet];
-        csharp = "";
+        csharp = "namespace nomnoml{\n";
         for (x=0;x<clases.length;x++){
           csharp += "class " + clases[x].split('|')[0] + "{\n";
           if(clases[x].split('|')[1]){
@@ -316,10 +325,11 @@ var DownloadLinks = function() {
           }
           csharp += "}\n";
         }
-        console.log(csharp);
+        csharp += "}\n";
+        console.log(claseRelacion);
         this.saveAs(new Blob([csharp],{
             type: "text/txt"
-        }), this.filename + ".txt")
+        }), this.filename + ".cs")
     }
     ;
     DownloadLinks.prototype.setFilename = function(filename) {
