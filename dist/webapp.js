@@ -291,12 +291,17 @@ var DownloadLinks = function() {
         var src = this.source;
         src = String(src);
         var transl = src.split(/\[(.*?)\]/);
-        var clases = "";
+        var clases = [];
+        var relaciones = [];
         for (x=0;x<transl.length;x++){
-          if(transl[x]!== (""||null||""||"->") && /\S/.test(transl[x])){
-            clases += " clase: " +transl[x];
+          if(transl[x].match(/^[A-Z0-9]/i)){
+            clases.push(transl[x]);
+          }
+          else if(/\S/.test(transl[x])){
+            relaciones.push(transl[x]);
           }
         }
+        console.log(relaciones);
         this.saveAs(new Blob([clases],{
             type: "text/txt"
         }), this.filename + ".txt")
