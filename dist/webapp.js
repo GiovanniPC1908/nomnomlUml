@@ -364,6 +364,11 @@ var DownloadLinks = function() {
             var position = 19;
             csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
           }
+          else if(claseRelacion[x] == "<:--"){
+            var b = "//Implementacion entre clase " + claseRelacion[x+1]+ " y clase " + claseRelacion[x-1]+ "\n";
+            var position = 19;
+            csharp= [csharp.slice(0, position), b, csharp.slice(position)].join('');
+          }
           else if(claseRelacion[x] == "+->"){
             var b = "//Composición entre clase " + claseRelacion[x-1]+ " y clase " + claseRelacion[x+1]+ "\n";
             var position = 19;
