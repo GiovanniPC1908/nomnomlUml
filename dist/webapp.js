@@ -318,7 +318,7 @@ var DownloadLinks = function() {
           if(clases[x].split('|')[1]){
             for(i = 0; i<clases[x].split('|')[1].split(';').length; i++)
               csharp += "\t" + clases[x].split('|')[1].split(';')[i] +"{ get; set; }\n";
-          }
+          }//fgsdz
           if(clases[x].split('|')[2]){
             for(i = 0; i<clases[x].split('|')[2].split(';').length; i++)
               csharp += "\tpublic void " + clases[x].split('|')[2].split(';')[i] + "{}\n"
